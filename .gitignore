@@ -1,0 +1,11 @@
+node_modules/
+package-lock.json
+.idea
+*.tsbuildinfo
+*.tgz
+
+# Python 运行时产物（ASR 服务：字节码缓存 / 虚拟环境）
+__pycache__/
+*.pyc
+.venv/
+venv/

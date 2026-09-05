@@ -1,0 +1,1 @@
+{"version":3,"file":"mic.d.ts","sourceRoot":"","sources":["../../../src/client/mic.ts"],"names":[],"mappings":"AAAA;;;;;;GAMG;AAmDH,MAAM,WAAW,UAAU;IACzB,IAAI,IAAI,OAAO,CAAC,IAAI,CAAC,CAAA;CACtB;AAED,qBAAa,cAAe,SAAQ,KAAK;gBAC3B,OAAO,SAAsB;CAI1C;AAED,wBAAsB,eAAe,CAAC,OAAO,EAAE,CAAC,GAAG,EAAE,WAAW,EAAE,GAAG,EAAE,MAAM,KAAK,IAAI,GAAG,OAAO,CAAC,UAAU,CAAC,CAwD3G"}

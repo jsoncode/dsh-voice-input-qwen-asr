@@ -1,0 +1,5 @@
+# npm pack 针对本目录的排除规则（files 白名单子目录不继承根 .gitignore）
+__pycache__
+*.pyc
+.venv
+venv
