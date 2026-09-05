@@ -7,10 +7,12 @@ A [DeepSeek Harness (DSH)](../deepseek-harness) dual-face plugin that adds **voi
 ## Demo
 
 <p align="center">
-  <video src="assets/demo/asr-demo.mp4" controls playsinline width="800"></video>
+  <a href="assets/demo/asr-demo.mp4">
+    <img src="assets/demo/asr-demo-poster.jpg" alt="Voice input demo (15s)" width="800" />
+  </a>
 </p>
 
-*(If the inline player does not load, [download / open the video](assets/demo/asr-demo.mp4) directly.)*
+*▶ Click the frame to play on GitHub (opens the built-in video player) · or [download the clip](assets/demo/asr-demo.mp4).*
 
 ## Features
 

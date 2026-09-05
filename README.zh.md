@@ -7,10 +7,12 @@
 ## 演示
 
 <p align="center">
-  <video src="assets/demo/asr-demo.mp4" controls playsinline width="800"></video>
+  <a href="assets/demo/asr-demo.mp4">
+    <img src="assets/demo/asr-demo-poster.jpg" alt="语音输入演示（15 秒）" width="800" />
+  </a>
 </p>
 
-*（若内联播放器未加载，可[直接打开/下载视频](assets/demo/asr-demo.mp4)。）*
+*▶ 点击画面在 GitHub 内播放（打开内置视频播放器）· 也可[下载视频](assets/demo/asr-demo.mp4)。*
 
 ## 功能
 
