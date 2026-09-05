@@ -1,5 +1,5 @@
 /**
- * dsh-voice-input —— 浏览器半边入口（window.__ModuleLoader__ 工厂产物）。
+ * dsh-voice-input-qwen-asr —— 浏览器半边入口（window.__ModuleLoader__ 工厂产物）。
  */
 export declare const name: string;
 export declare const inject: string[];

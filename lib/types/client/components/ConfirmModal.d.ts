@@ -1,5 +1,5 @@
 /**
- * dsh-voice-input —— 确认弹框（portal 到 document.body，遮罩点击 = 取消）。
+ * dsh-voice-input-qwen-asr —— 确认弹框（portal 到 document.body，遮罩点击 = 取消）。
  */
 import type { ReactNode } from 'react';
 export interface ConfirmModalProps {

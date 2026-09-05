@@ -1,9 +1,9 @@
 /**
- * dsh-voice-input —— 插件宿主半边入口。
+ * dsh-voice-input-qwen-asr —— 插件宿主半边入口。
  *
- * - `/dsh-voice-input/api` HTTP 路由（webServer 注册 + 信任围栏）：浏览器半边
+ * - `/dsh-voice-input-qwen-asr/api` HTTP 路由（webServer 注册 + 信任围栏）：浏览器半边
  *   （录音按钮状态检查 / 设置页）经 fetch 调用，JSON op 分发见 ops.ts；
- * - `/api/dsh-voice-input.ws` WebSocket 升级路由（connection 服务鉴权）：
+ * - `/api/dsh-voice-input-qwen-asr.ws` WebSocket 升级路由（connection 服务鉴权）：
  *   浏览器录音音频流经 relay.ts 中继到本地 Python ASR 服务
  *   （运行库 venv 启动 python/asr_server.py，Qwen3-ASR-0.6B 推理）；
  * - 环境安装编排（git clone 运行库/模型库、创建 venv、安装依赖）见 installer.ts；
@@ -17,7 +17,7 @@ import type { Context } from '@deepseek-ai/cordis';
 import './cordis-augment.d.ts';
 import { sanitizeOverrides } from './ops.ts';
 import type { VoiceConfigOverrides, VoicePluginConfig } from './types.ts';
-export declare const name = "dsh-voice-input";
+export declare const name = "dsh-voice-input-qwen-asr";
 export declare const inject: string[];
 export declare const Config: import("@deepseek-ai/schemastery").default<VoicePluginConfig>;
 export declare function apply(ctx: Context, config: Partial<VoicePluginConfig>): void;

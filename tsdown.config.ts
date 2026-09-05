@@ -1,5 +1,5 @@
 /**
- * dsh-voice-input —— tsdown 构建配置（对齐 dsh-jenkins 的 client bundle 方案）。
+ * dsh-voice-input-qwen-asr —— tsdown 构建配置（对齐 dsh-jenkins 的 client bundle 方案）。
  *
  * 两个产物：
  * - lib/index.js  宿主半边（Node，ESM）：src/host/index.ts 打包，@deepseek-ai/* 与
@@ -28,7 +28,7 @@ const SEED_MODULES = [
 ]
 
 const nodeConfig: UserConfig = {
-  name: 'dsh-voice-input',
+  name: 'dsh-voice-input-qwen-asr',
   entry: ['src/host/index.ts'],
   outDir: 'lib',
   format: ['esm'],
@@ -42,7 +42,7 @@ const nodeConfig: UserConfig = {
 }
 
 const clientConfig: UserConfig = {
-  name: 'dsh-voice-input/client',
+  name: 'dsh-voice-input-qwen-asr/client',
   entry: { client: 'src/client/index.ts' },
   // 浏览器 bundle 与 node half 同目录（lib/）；entry key 固定输出 lib/client.js。
   outDir: 'lib',
@@ -68,7 +68,7 @@ const clientConfig: UserConfig = {
   },
   // __ModuleLoader__ 工厂包装（与 dsh-jenkins 相同的 banner/footer 方案）：
   // 产物整体位于 factory 函数体内，顶部 require(...) 解析到 factory 参数（seed 表）。
-  banner: `window.__ModuleLoader__.load({ id: 'dsh-voice-input', factory: (require) => {
+  banner: `window.__ModuleLoader__.load({ id: 'dsh-voice-input-qwen-asr', factory: (require) => {
 var module = { exports: {} }; var exports = module.exports;`,
   footer: 'return module.exports; } });',
 }

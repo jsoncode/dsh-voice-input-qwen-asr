@@ -1,5 +1,5 @@
 /**
- * dsh-voice-input —— 插件数据文件（$DSH_HOME/dsh-voice-input.json）。
+ * dsh-voice-input-qwen-asr —— 插件数据文件（$DSH_HOME/dsh-voice-input-qwen-asr.json）。
  *
  * 只存运行时可编辑的配置 overrides（设置页写入），安装状态一律以文件系统
  * 实测为准（目录/venv/标记文件），不做双份记账。原子写：临时文件 + rename。
@@ -29,7 +29,7 @@ export function resolveStoreDir(documentPath?: string): string {
 }
 
 export function storeFile(storeDir: string): string {
-  return join(storeDir, 'dsh-voice-input.json')
+  return join(storeDir, 'dsh-voice-input-qwen-asr.json')
 }
 
 export function loadStore(file: string): VoiceStore {

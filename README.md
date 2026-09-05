@@ -1,4 +1,4 @@
-# dsh-voice-input
+# dsh-voice-input-qwen-asr
 
 [简体中文](./README.zh.md) · English
 
@@ -8,7 +8,7 @@ A [DeepSeek Harness (DSH)](../deepseek-harness) dual-face plugin that adds **voi
 
 - **Mic button** — registered into the `conversation.input.right` slot, rendered on the left of the composer's send button. Click to start, click again (or press "Done, insert") to stop.
 - **Recording bubble** — a portal-anchored bubble with a pulsing indicator, RMS-driven wave bars, elapsed time, and the live partial transcript streamed back from ASR.
-- **Real-time streaming** — the browser captures 16 kHz PCM16 mono via AudioWorklet and pushes chunks over a host-relayed WebSocket (`/api/dsh-voice-input.ws`) to the local ASR service; partial transcripts stream back in real time.
+- **Real-time streaming** — the browser captures 16 kHz PCM16 mono via AudioWorklet and pushes chunks over a host-relayed WebSocket (`/api/dsh-voice-input-qwen-asr.ws`) to the local ASR service; partial transcripts stream back in real time.
 - **Local ASR service** — the host half spawns `python/asr_server.py` with the runtime virtualenv's Python. The server loads `Qwen3-ASR-0.6B` (transformers backend, CUDA when available) and serves a WebSocket transcription endpoint.
 - **Environment setup page** — a `settings.section` page ("Voice") that clones the runtime repo and model repo, creates a Python virtualenv inside the runtime directory, installs dependencies, starts/stops the service, and streams install/server logs.
 
@@ -22,7 +22,7 @@ A [DeepSeek Harness (DSH)](../deepseek-harness) dual-face plugin that adds **voi
 ## Install
 
 ```sh
-dsh plugin --profile web add ./dsh-voice-input   # or npm name / .tgz / github:you/repo#sha
+dsh plugin --profile web add ./dsh-voice-input-qwen-asr   # or npm name / .tgz / github:you/repo#sha
 dsh --profile web --dump-config                  # verify the layer
 dsh --profile web                                # restart the host
 ```
@@ -37,16 +37,16 @@ dsh --profile web                                # restart the host
 
 ```
 browser                          host (Node)                      local python
-┌─────────────────┐   POST /dsh-voice-input/api   ┌──────────────┐
+┌─────────────────┐   POST /dsh-voice-input-qwen-asr/api   ┌──────────────┐
 │ mic button      │ ────────────────────────────▶ │ ops: status  │
 │ bubble (portal) │                               │ install / sv │
-│ settings page   │   WS /api/dsh-voice-input.ws  │ installer    │
+│ settings page   │   WS /api/dsh-voice-input-qwen-asr.ws  │ installer    │
 │  AudioWorklet   │ ────────────────────────────▶ │ relay (ws)   │──▶ ws://127.0.0.1:18787/ws
 │  PCM16 @16k     │ ◀──────────────────────────── │              │    asr_server.py
 └─────────────────┘    partial / final JSON        └──────────────┘    Qwen3-ASR-0.6B
 ```
 
-- `src/host/` — cordis plugin: HTTP API route (trust-fenced), WebSocket upgrade route (connection-service auth), installer (git clone / venv / pip), ASR process manager, relay hub, JSON store at `$DSH_HOME/dsh-voice-input.json`.
+- `src/host/` — cordis plugin: HTTP API route (trust-fenced), WebSocket upgrade route (connection-service auth), installer (git clone / venv / pip), ASR process manager, relay hub, JSON store at `$DSH_HOME/dsh-voice-input-qwen-asr.json`.
 - `src/client/` — browser plugin: `conversation.input.right` + `settings.section` slots, i18n (zh/en), styles, mic capture, WS client.
 - `python/asr_server.py` — asyncio + `websockets` server; buffers incoming PCM, periodically transcribes a tail window for partials, transcribes the full buffer on `stop`.
 

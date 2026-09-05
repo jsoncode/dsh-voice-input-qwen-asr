@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
-"""dsh-voice-input · Qwen3-ASR 本地推理服务（WebSocket 实时转写）。
+"""dsh-voice-input-qwen-asr · Qwen3-ASR 本地推理服务（WebSocket 实时转写）。
 
-由 dsh-voice-input 插件的宿主半边以运行库虚拟环境的 Python 启动：
+由 dsh-voice-input-qwen-asr 插件的宿主半边以运行库虚拟环境的 Python 启动：
 
     <runtime>/.venv/bin/python asr_server.py \
         --model <model-dir> --port 18787 [--language Auto] \
@@ -174,7 +174,7 @@ class Engine:
 
 
 def parse_args():
-    parser = argparse.ArgumentParser(description="Qwen3-ASR streaming server for dsh-voice-input")
+    parser = argparse.ArgumentParser(description="Qwen3-ASR streaming server for dsh-voice-input-qwen-asr")
     parser.add_argument("--model", required=True, help="模型权重目录（Qwen3-ASR-0.6B 本地克隆路径）")
     parser.add_argument("--host", default="127.0.0.1")
     parser.add_argument("--port", type=int, default=18787)

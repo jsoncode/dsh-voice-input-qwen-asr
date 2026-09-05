@@ -1,5 +1,5 @@
 /**
- * dsh-voice-input —— 浏览器半边插件注册。
+ * dsh-voice-input-qwen-asr —— 浏览器半边插件注册。
  *
  * - `conversation.input.right`（list, session scope）：麦克风按钮 —— 渲染在
  *   composer 工具行 trailing 组的最前，即发送按钮左侧；组件经宿主注入的
@@ -34,12 +34,12 @@ export interface ClientPlugin {
 
 export function createPlugin(): ClientPlugin {
   return {
-    name: 'dsh-voice-input',
+    name: 'dsh-voice-input-qwen-asr',
     inject: ['slots', 'locale'],
     apply(ctx: ClientCtx): void {
       const slots = ctx.get('slots') as SlotsService | undefined
       if (slots === undefined) {
-        console.warn('[dsh-voice-input] slots 服务不可用，浏览器半边未注册任何 UI')
+        console.warn('[dsh-voice-input-qwen-asr] slots 服务不可用，浏览器半边未注册任何 UI')
         return
       }
       initI18n(ctx as Parameters<typeof initI18n>[0])
@@ -48,7 +48,7 @@ export function createPlugin(): ClientPlugin {
       // composer 工具行 trailing 组（发送按钮左侧）
       slots.inject('conversation.input.right', () =>
         slots.register(
-          { name: 'conversation.input.right', id: 'dsh-voice-input-mic', order: 20, label: () => t('micLabel') },
+          { name: 'conversation.input.right', id: 'dsh-voice-input-qwen-asr-mic', order: 20, label: () => t('micLabel') },
           VoiceButton,
         ),
       )

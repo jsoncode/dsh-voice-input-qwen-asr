@@ -1,5 +1,5 @@
 /**
- * dsh-voice-input —— 环境安装编排器。
+ * dsh-voice-input-qwen-asr —— 环境安装编排器。
  *
  * 四个步骤（可整体一键执行，也可单步重试）：
  *   runtime : git clone https://github.com/QwenLM/Qwen3-ASR          （运行库）

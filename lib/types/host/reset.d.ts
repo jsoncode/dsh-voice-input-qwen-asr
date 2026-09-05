@@ -1,5 +1,5 @@
 /**
- * dsh-voice-input —— 环境重置。
+ * dsh-voice-input-qwen-asr —— 环境重置。
  *
  * 清理由插件创建/管理的产物：venv、依赖标记，以及**默认位置**的运行库/模型库
  * 克隆目录。用户通过配置指定的自定义 runtimeDir / modelDir 本体不会被删除

@@ -1,11 +1,11 @@
 /**
- * dsh-voice-input —— 运行环境路径解析与安装状态实测。
+ * dsh-voice-input-qwen-asr —— 运行环境路径解析与安装状态实测。
  *
  * 目录布局（installDir 默认 <storeDir>/voice-input）：
  *   <installDir>/Qwen3-ASR/            运行库（github.com/QwenLM/Qwen3-ASR）
  *     └── .venv/                       Python 虚拟环境（运行库目录下创建）
  *   <installDir>/Qwen3-ASR-0.6B/       模型库（modelscope.cn/Qwen/Qwen3-ASR-0.6B）
- *   <installDir>/Qwen3-ASR/.dsh-voice-input-deps-ok   依赖安装完成标记
+ *   <installDir>/Qwen3-ASR/.dsh-voice-input-qwen-asr-deps-ok   依赖安装完成标记
  */
 import type { VoicePaths, VoicePluginConfig } from './types.ts';
 export declare const RUNTIME_REPO = "https://github.com/QwenLM/Qwen3-ASR";

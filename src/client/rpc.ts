@@ -1,5 +1,5 @@
 /**
- * dsh-voice-input —— 浏览器半边 → 宿主 HTTP RPC（/dsh-voice-input/api）。
+ * dsh-voice-input-qwen-asr —— 浏览器半边 → 宿主 HTTP RPC（/dsh-voice-input-qwen-asr/api）。
  *
  * POST JSON（{ op, ...params }），宿主以 { ok, value } / { ok, error } 信封回传。
  * 请求不进入对话命令通道，页面不会出现 command 节点 / 调试卡片。
@@ -21,7 +21,7 @@ export class ApiError extends Error {
 export async function api<T = unknown>(op: string, params?: Record<string, unknown>): Promise<T> {
   let res: Response
   try {
-    res = await fetch('/dsh-voice-input/api', {
+    res = await fetch('/dsh-voice-input-qwen-asr/api', {
       method: 'POST',
       headers: { 'content-type': 'application/json' },
       body: JSON.stringify({ op, ...(params ?? {}) }),

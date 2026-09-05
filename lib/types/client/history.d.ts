@@ -1,5 +1,5 @@
 /**
- * dsh-voice-input —— 识别记录（浏览器 IndexedDB 持久化 + WAV 封装）。
+ * dsh-voice-input-qwen-asr —— 识别记录（浏览器 IndexedDB 持久化 + WAV 封装）。
  *
  * 每次语音输入完成后，把「音频 + 识别文本」成对保存：音频以 WAV Blob
  * （PCM16 LE 单声道 16kHz，录音期间收集的 PCM 分片直接拼装，无需转码）

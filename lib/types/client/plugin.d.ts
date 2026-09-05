@@ -1,5 +1,5 @@
 /**
- * dsh-voice-input —— 浏览器半边插件注册。
+ * dsh-voice-input-qwen-asr —— 浏览器半边插件注册。
  *
  * - `conversation.input.right`（list, session scope）：麦克风按钮 —— 渲染在
  *   composer 工具行 trailing 组的最前，即发送按钮左侧；组件经宿主注入的

@@ -1,5 +1,5 @@
 /**
- * dsh-voice-input —— 浏览器半边样式（class 前缀 dshv-，幂等注入 document.head）。
+ * dsh-voice-input-qwen-asr —— 浏览器半边样式（class 前缀 dshv-，幂等注入 document.head）。
  *
  * 颜色全部走宿主设计令牌（ui-theme design-platform.css 的 --dsw-alias-* 别名层，
  * 与 ui-primitives Input.module.css 的输入框配方一致），随浅色/深色主题切换；

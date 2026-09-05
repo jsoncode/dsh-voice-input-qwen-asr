@@ -1,5 +1,5 @@
 /**
- * dsh-voice-input —— 宿主半边共享类型（宿主服务最小视图 + 插件配置）。
+ * dsh-voice-input-qwen-asr —— 宿主半边共享类型（宿主服务最小视图 + 插件配置）。
  */
 /** 宿主 webServer 服务最小视图（@deepseek-ai/dsh-host-webserver）。 */
 export interface WebServerService {

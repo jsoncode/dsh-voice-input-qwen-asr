@@ -1,9 +1,9 @@
 /**
- * dsh-voice-input —— 插件宿主半边入口。
+ * dsh-voice-input-qwen-asr —— 插件宿主半边入口。
  *
- * - `/dsh-voice-input/api` HTTP 路由（webServer 注册 + 信任围栏）：浏览器半边
+ * - `/dsh-voice-input-qwen-asr/api` HTTP 路由（webServer 注册 + 信任围栏）：浏览器半边
  *   （录音按钮状态检查 / 设置页）经 fetch 调用，JSON op 分发见 ops.ts；
- * - `/api/dsh-voice-input.ws` WebSocket 升级路由（connection 服务鉴权）：
+ * - `/api/dsh-voice-input-qwen-asr.ws` WebSocket 升级路由（connection 服务鉴权）：
  *   浏览器录音音频流经 relay.ts 中继到本地 Python ASR 服务
  *   （运行库 venv 启动 python/asr_server.py，Qwen3-ASR-0.6B 推理）；
  * - 环境安装编排（git clone 运行库/模型库、创建 venv、安装依赖）见 installer.ts；
@@ -29,7 +29,7 @@ import { EMPTY_STORE, loadStore, resolveStoreDir, saveStore, storeFile, withDefa
 import { resolvePaths } from './paths.ts'
 import type { ConnectionService, SettingsService, VoiceConfigOverrides, VoicePluginConfig, WebRuntimeService, WebServerService } from './types.ts'
 
-export const name = 'dsh-voice-input'
+export const name = 'dsh-voice-input-qwen-asr'
 export const inject = ['webServer', 'connection', 'settings']
 
 /* ── 配置（docs/develop/basic/config）────────────────────────────── */
@@ -49,14 +49,14 @@ export const Config = Schema.object({
 
 /* ── 常量 ────────────────────────────────────────────────────────── */
 
-const API_PATH = '/dsh-voice-input/api'
-const WS_PATH = '/api/dsh-voice-input.ws'
+const API_PATH = '/dsh-voice-input-qwen-asr/api'
+const WS_PATH = '/api/dsh-voice-input-qwen-asr.ws'
 const API_BODY_LIMIT = 1 << 20
 
 /** 本文件为 lib/index.js → 包内 python/asr_server.py 在其上一级。 */
 const ASR_SCRIPT = fileURLToPath(new URL('../python/asr_server.py', import.meta.url))
 
-/** /dsh-voice-input/api 信封：{ ok: true, value } 成功；{ ok: false, error } 路由级失败。 */
+/** /dsh-voice-input-qwen-asr/api 信封：{ ok: true, value } 成功；{ ok: false, error } 路由级失败。 */
 interface ApiEnvelope {
   ok: boolean
   value?: unknown
@@ -76,7 +76,7 @@ export function apply(ctx: Context, config: Partial<VoicePluginConfig>): void {
   const settings = ctx.get<SettingsService>('settings')
   const webRuntime = ctx.get<WebRuntimeService>('webRuntime')
   if (webServer === undefined || connection === undefined) {
-    console.warn('[dsh-voice-input] 缺少 webServer/connection 服务，插件未启用')
+    console.warn('[dsh-voice-input-qwen-asr] 缺少 webServer/connection 服务，插件未启用')
     return
   }
   const trustedHosts = webRuntime?.trustedHosts ?? []
@@ -139,7 +139,7 @@ export function apply(ctx: Context, config: Partial<VoicePluginConfig>): void {
       },
     })
   } catch (e) {
-    console.warn('[dsh-voice-input] register api route failed:', e instanceof Error ? e.message : String(e))
+    console.warn('[dsh-voice-input-qwen-asr] register api route failed:', e instanceof Error ? e.message : String(e))
   }
 
   // ── WebSocket 升级路由（录音音频流中继）───────────────────────────
@@ -157,7 +157,7 @@ export function apply(ctx: Context, config: Partial<VoicePluginConfig>): void {
       },
     })
   } catch (e) {
-    console.warn('[dsh-voice-input] register upgrade route failed:', e instanceof Error ? e.message : String(e))
+    console.warn('[dsh-voice-input-qwen-asr] register upgrade route failed:', e instanceof Error ? e.message : String(e))
   }
 
   ctx.effect(() => () => {

@@ -47,8 +47,8 @@ const sandbox = {
 vm.createContext(sandbox)
 vm.runInContext(code, sandbox, { filename: 'lib/client.js' })
 
-if (!factories.has('dsh-voice-input')) {
-  console.error('verify-client FAIL: bundle 未注册 "dsh-voice-input" 工厂')
+if (!factories.has('dsh-voice-input-qwen-asr')) {
+  console.error('verify-client FAIL: bundle 未注册 "dsh-voice-input-qwen-asr" 工厂')
   process.exit(1)
 }
 
@@ -62,10 +62,10 @@ const makeRequire = (edges) => (spec) => {
 
 // 物化（对齐 materialize：同步、memoized）
 const edges = new Set()
-const exports = factories.get('dsh-voice-input')(makeRequire(edges))
+const exports = factories.get('dsh-voice-input-qwen-asr')(makeRequire(edges))
 const mod = exports || {}
 
-const shapeOk = mod.name === 'dsh-voice-input' && typeof mod.apply === 'function' && Array.isArray(mod.inject)
+const shapeOk = mod.name === 'dsh-voice-input-qwen-asr' && typeof mod.apply === 'function' && Array.isArray(mod.inject)
 if (!shapeOk) {
   console.error('verify-client FAIL: 模块形状错误', JSON.stringify({ name: mod.name, apply: typeof mod.apply, inject: mod.inject }))
   process.exit(1)

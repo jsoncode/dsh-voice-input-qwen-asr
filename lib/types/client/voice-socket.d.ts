@@ -1,5 +1,5 @@
 /**
- * dsh-voice-input —— 录音 WebSocket 客户端（/api/dsh-voice-input.ws）。
+ * dsh-voice-input-qwen-asr —— 录音 WebSocket 客户端（/api/dsh-voice-input-qwen-asr.ws）。
  *
  * 二进制帧 = PCM16 音频块（上行）；文本帧 = 双向 JSON 控制
  * （上行 stop/abort，下行 partial/final/state/error）。

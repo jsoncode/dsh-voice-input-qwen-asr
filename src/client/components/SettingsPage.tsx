@@ -1,5 +1,5 @@
 /**
- * dsh-voice-input —— 设置页「语音识别」（settings.section）。
+ * dsh-voice-input-qwen-asr —— 设置页「语音识别」（settings.section）。
  *
  * 页面结构（对齐宿主设置页的语言习惯）：
  * - ASR 服务卡片：状态徽标 / 设备 / 端口 + 启动·停止；

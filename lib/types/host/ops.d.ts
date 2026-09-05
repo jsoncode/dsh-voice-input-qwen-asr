@@ -1,5 +1,5 @@
 /**
- * dsh-voice-input —— /dsh-voice-input/api 的 op 分发。
+ * dsh-voice-input-qwen-asr —— /dsh-voice-input-qwen-asr/api 的 op 分发。
  *
  * op 列表（POST JSON：{ op, ...params }）：
  *   config.get                       → { config, storeDir }

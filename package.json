@@ -1,22 +1,22 @@
 {
-  "name": "dsh-voice-input",
+  "name": "dsh-voice-input-qwen-asr",
   "version": "0.1.0",
   "author": "jsoncode",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/jsoncode/dsh-voice-input/issues"
+    "url": "https://github.com/jsoncode/dsh-voice-input-qwen-asr/issues"
   },
-  "homepage": "https://github.com/jsoncode/dsh-voice-input#readme",
+  "homepage": "https://github.com/jsoncode/dsh-voice-input-qwen-asr#readme",
   "description": "Voice input plugin (dual-face): mic button beside the composer send action, live recording bubble streaming PCM to a local Qwen3-ASR python service managed by the host, plus an ASR environment settings page (clone runtime/model repos, create venv, run server). Bilingual UI (zh/en)",
   "type": "module",
   "packageManager": "pnpm@10.33.0",
   "keywords": [
     "dsh-plugin",
-    "dsh-voice-input",
+    "dsh-voice-input-qwen-asr",
     "asr",
     "qwen3-asr"
   ],
-  "repository": "github:jsoncode/dsh-voice-input",
+  "repository": "github:jsoncode/dsh-voice-input-qwen-asr",
   "publishConfig": {
     "registry": "https://registry.npmjs.org/",
     "access": "public"
