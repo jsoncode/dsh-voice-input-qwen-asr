@@ -8,13 +8,13 @@
  *   deps    : venv pip install -e .（运行库）+ websockets/numpy       （依赖安装）
  *
  * 步骤在后台顺序执行，stdout/stderr 逐行进环形日志；浏览器半边轮询
- * install.status 展示进度。已完成的步骤（目录/标记存在）自动跳过。
+ * install.status 展示进度。已完成的步骤（目录/venv/标记存在）自动跳过。
  */
 
 import { spawn, type ChildProcess } from 'node:child_process'
 import { existsSync, writeFileSync } from 'node:fs'
 import { join } from 'node:path'
-import { isNonEmptyDir, inspectUsable, MODEL_REPO, RUNTIME_REPO } from './paths.ts'
+import { isNonEmptyDir, inspectUsable, depsInstalled, MODEL_REPO, RUNTIME_REPO } from './paths.ts'
 import type { VoicePaths, VoicePluginConfig } from './types.ts'
 
 export type StepId = 'runtime' | 'model' | 'venv' | 'deps'
@@ -190,6 +190,11 @@ export class Installer {
 
   private async stepDeps(paths: VoicePaths): Promise<void> {
     if (!existsSync(paths.venvPython)) throw new Error('虚拟环境不存在')
+    // 已装依赖（当前名或旧名标记）则跳过，避免重复下载 torch
+    if (depsInstalled(paths)) {
+      this.pushLog('[deps] 依赖已安装（完成标记存在），跳过安装')
+      return
+    }
     const pip = [paths.venvPython, '-m', 'pip']
     const indexArgs = this.getPipIndexArgs()
     this.pushLog('[deps] pip install -U pip')

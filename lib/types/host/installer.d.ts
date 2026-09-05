@@ -8,7 +8,7 @@
  *   deps    : venv pip install -e .（运行库）+ websockets/numpy       （依赖安装）
  *
  * 步骤在后台顺序执行，stdout/stderr 逐行进环形日志；浏览器半边轮询
- * install.status 展示进度。已完成的步骤（目录/标记存在）自动跳过。
+ * install.status 展示进度。已完成的步骤（目录/venv/标记存在）自动跳过。
  */
 import type { VoicePaths, VoicePluginConfig } from './types.ts';
 export type StepId = 'runtime' | 'model' | 'venv' | 'deps';

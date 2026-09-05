@@ -48,10 +48,15 @@ function stateChip(state: string): { cls: string; label: string } {
   }
 }
 
-function stepChip(stepKey: StepKey, view: { state: string } | undefined, usable: boolean): { cls: string; label: string } {
+function stepChip(stepKey: StepKey, view: { state: string } | undefined, usable: boolean, installed: boolean): { cls: string; label: string } {
   // 克隆步骤以可用性检测结果为准（自定义路径可用同样算就绪）
   if ((stepKey === 'runtime' || stepKey === 'model') && usable) {
     return { cls: 'dshv-chip-ok', label: t('usable') }
+  }
+  // 安装编排器的步骤状态是会话内的（插件重启后回到 idle）：
+  // idle 且文件系统实测已安装时，按实测显示，避免把已有环境误报成未安装
+  if ((view?.state ?? 'idle') === 'idle' && installed) {
+    return { cls: 'dshv-chip-ok', label: t('stepStateInstalled') }
   }
   return stateChip(view?.state ?? 'idle')
 }
@@ -211,7 +216,7 @@ export function SettingsPage(): React.ReactElement {
             const isRuntime = step === 'runtime'
             const isModel = step === 'model'
             const stepUsable = (isRuntime && usable.runtime) || (isModel && usable.model)
-            const chip = stepChip(step, view, stepUsable)
+            const chip = stepChip(step, view, stepUsable, installed[step])
             return (
               <div className="dshv-step" key={step}>
                 <span className="dshv-step-name">

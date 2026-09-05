@@ -6,12 +6,17 @@
  *     └── .venv/                       Python 虚拟环境（运行库目录下创建）
  *   <installDir>/Qwen3-ASR-0.6B/       模型库（modelscope.cn/Qwen/Qwen3-ASR-0.6B）
  *   <installDir>/Qwen3-ASR/.dsh-voice-input-qwen-asr-deps-ok   依赖安装完成标记
+ *     （兼容旧名 .dsh-voice-input-deps-ok：v0.1.0 包名 dsh-voice-input 时代写入）
  */
 import type { VoicePaths, VoicePluginConfig } from './types.ts';
 export declare const RUNTIME_REPO = "https://github.com/QwenLM/Qwen3-ASR";
 export declare const MODEL_REPO = "https://www.modelscope.cn/Qwen/Qwen3-ASR-0.6B.git";
 export declare const RUNTIME_DIR_NAME = "Qwen3-ASR";
 export declare const MODEL_DIR_NAME = "Qwen3-ASR-0.6B";
+/** 依赖安装完成标记（当前名）。 */
+export declare const DEPS_MARKER_NAME = ".dsh-voice-input-qwen-asr-deps-ok";
+/** 依赖标记旧名（v0.1.0 包名 dsh-voice-input 时代写入），升级用户的环境据此仍判已安装。 */
+export declare const LEGACY_DEPS_MARKER_NAME = ".dsh-voice-input-deps-ok";
 export declare function resolvePaths(config: VoicePluginConfig, storeDir: string, asrScript: string): VoicePaths;
 export interface InstalledState {
     runtime: boolean;
@@ -19,6 +24,8 @@ export interface InstalledState {
     venv: boolean;
     deps: boolean;
 }
+/** 依赖是否已安装：当前名或旧名标记任一存在（旧名来自 v0.1.0 升级环境）。 */
+export declare function depsInstalled(paths: VoicePaths): boolean;
 /** 以文件系统实测安装状态（不做双份记账）。 */
 export declare function inspectInstalled(paths: VoicePaths): InstalledState;
 export interface UsableState {

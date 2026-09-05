@@ -7,10 +7,11 @@
  */
 
 import { rm } from 'node:fs/promises'
-import { parse, isAbsolute } from 'node:path'
+import { join, parse, isAbsolute } from 'node:path'
 import type { VoicePaths, VoicePluginConfig } from './types.ts'
 import type { AsrServer } from './asrproc.ts'
 import type { Installer } from './installer.ts'
+import { LEGACY_DEPS_MARKER_NAME } from './paths.ts'
 
 export interface ResetResult {
   ok: boolean
@@ -32,9 +33,10 @@ export class EnvReset {
       asr.stop()
       const config = getConfig()
       const paths = getPaths()
-      // 先删插件产物（venv / 标记），再删默认位置的克隆目录
+      // 先删插件产物（venv / 标记，含 v0.1.0 旧名标记），再删默认位置的克隆目录
       await removeManaged(paths.venvDir)
       await removeManaged(paths.depsMarker)
+      await removeManaged(join(paths.runtimeDir, LEGACY_DEPS_MARKER_NAME))
       if (config.runtimeDir.trim() === '') await removeManaged(paths.runtimeDir)
       if (config.modelDir.trim() === '') await removeManaged(paths.modelDir)
       return { ok: true }

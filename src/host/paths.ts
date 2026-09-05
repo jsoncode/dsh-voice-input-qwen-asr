@@ -6,6 +6,7 @@
  *     └── .venv/                       Python 虚拟环境（运行库目录下创建）
  *   <installDir>/Qwen3-ASR-0.6B/       模型库（modelscope.cn/Qwen/Qwen3-ASR-0.6B）
  *   <installDir>/Qwen3-ASR/.dsh-voice-input-qwen-asr-deps-ok   依赖安装完成标记
+ *     （兼容旧名 .dsh-voice-input-deps-ok：v0.1.0 包名 dsh-voice-input 时代写入）
  */
 
 import { existsSync, readdirSync, readFileSync, statSync } from 'node:fs'
@@ -16,6 +17,10 @@ export const RUNTIME_REPO = 'https://github.com/QwenLM/Qwen3-ASR'
 export const MODEL_REPO = 'https://www.modelscope.cn/Qwen/Qwen3-ASR-0.6B.git'
 export const RUNTIME_DIR_NAME = 'Qwen3-ASR'
 export const MODEL_DIR_NAME = 'Qwen3-ASR-0.6B'
+/** 依赖安装完成标记（当前名）。 */
+export const DEPS_MARKER_NAME = '.dsh-voice-input-qwen-asr-deps-ok'
+/** 依赖标记旧名（v0.1.0 包名 dsh-voice-input 时代写入），升级用户的环境据此仍判已安装。 */
+export const LEGACY_DEPS_MARKER_NAME = '.dsh-voice-input-deps-ok'
 
 export function resolvePaths(config: VoicePluginConfig, storeDir: string, asrScript: string): VoicePaths {
   const installDir = config.installDir.trim() !== '' && isAbsolute(config.installDir.trim())
@@ -30,7 +35,7 @@ export function resolvePaths(config: VoicePluginConfig, storeDir: string, asrScr
     : join(installDir, MODEL_DIR_NAME)
   const venvDir = join(runtimeDir, '.venv')
   const venvPython = join(venvDir, process.platform === 'win32' ? 'Scripts\\python.exe' : 'bin/python')
-  const depsMarker = join(runtimeDir, '.dsh-voice-input-qwen-asr-deps-ok')
+  const depsMarker = join(runtimeDir, DEPS_MARKER_NAME)
   return { installDir, runtimeDir, modelDir, venvDir, venvPython, depsMarker }
 }
 
@@ -39,6 +44,11 @@ export interface InstalledState {
   model: boolean
   venv: boolean
   deps: boolean
+}
+
+/** 依赖是否已安装：当前名或旧名标记任一存在（旧名来自 v0.1.0 升级环境）。 */
+export function depsInstalled(paths: VoicePaths): boolean {
+  return existsSync(paths.depsMarker) || existsSync(join(paths.runtimeDir, LEGACY_DEPS_MARKER_NAME))
 }
 
 /** 以文件系统实测安装状态（不做双份记账）。 */
@@ -54,7 +64,7 @@ export function inspectInstalled(paths: VoicePaths): InstalledState {
     runtime: isDir(join(paths.runtimeDir, '.git')),
     model: isDir(join(paths.modelDir, '.git')),
     venv: existsSync(paths.venvPython),
-    deps: existsSync(paths.depsMarker),
+    deps: depsInstalled(paths),
   }
 }
 
