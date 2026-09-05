@@ -4,6 +4,14 @@
 
 A [DeepSeek Harness (DSH)](../deepseek-harness) dual-face plugin that adds **voice input** to the chat composer: a mic button next to the send action, a live recording bubble, and a local **Qwen3-ASR** inference service managed entirely by the host.
 
+## Demo
+
+<p align="center">
+  <video src="assets/demo/asr-demo.mp4" controls playsinline width="800"></video>
+</p>
+
+*(If the inline player does not load, [download / open the video](assets/demo/asr-demo.mp4) directly.)*
+
 ## Features
 
 - **Mic button** — registered into the `conversation.input.right` slot, rendered on the left of the composer's send button. Click to start, click again (or press "Done, insert") to stop.

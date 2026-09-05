@@ -4,6 +4,14 @@
 
 [DeepSeek Harness (DSH)](../deepseek-harness) 双面插件：在聊天输入框旁新增**语音输入**——发送按钮左侧的麦克风按钮、实时录音气泡，以及由宿主托管运行的本地 **Qwen3-ASR** 语音识别服务。
 
+## 演示
+
+<p align="center">
+  <video src="assets/demo/asr-demo.mp4" controls playsinline width="800"></video>
+</p>
+
+*（若内联播放器未加载，可[直接打开/下载视频](assets/demo/asr-demo.mp4)。）*
+
 ## 功能
 
 - **麦克风按钮** — 注册在 `conversation.input.right` 插槽，渲染于发送按钮左侧；点击开始录音，再次点击（或点「完成并输入」）结束。
